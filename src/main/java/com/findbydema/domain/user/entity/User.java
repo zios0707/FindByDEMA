@@ -68,4 +68,12 @@ public class User implements UserDetails {
         return true;
     }
 
+    public User(String nickname, String studentId, String email, String password, String img) {
+        this.nickname = nickname;
+        this.studentId = studentId;
+        this.email = email;
+        this.password = password;
+        this.img = img;
+    }
+
 }

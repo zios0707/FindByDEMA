@@ -1,13 +1,13 @@
 package com.findbydema.domain.user.controller;
 
-import com.findbydema.domain.user.controller.dto.request.GetRequest;
+import com.findbydema.domain.user.controller.dto.request.GetUserRequest;
 import com.findbydema.domain.user.controller.dto.request.LoginRequest;
 import com.findbydema.domain.user.controller.dto.request.SignRequest;
 import com.findbydema.domain.user.controller.dto.response.GetResponse;
 import com.findbydema.domain.user.controller.dto.response.LoginResponse;
-import com.findbydema.domain.user.service.GetService;
-import com.findbydema.domain.user.service.LoginService;
-import com.findbydema.domain.user.service.SignService;
+import com.findbydema.domain.user.service.GetUserService;
+import com.findbydema.domain.user.service.auth.LoginService;
+import com.findbydema.domain.user.service.auth.SignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final LoginService loginService;
     private final SignService signService;
-    private final GetService getService;
+    private final GetUserService getUserService;
+
+    // COMMON
 
     @GetMapping("/")
-    public GetResponse get(@RequestBody GetRequest getRequest) {
-        return getService.get(getRequest);
+    public GetResponse get(@RequestBody GetUserRequest getUserRequest) {
+        return getUserService.get(getUserRequest);
     }
 
+    // AUTH
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
@@ -34,4 +37,7 @@ public class UserController {
     public LoginResponse sign(@RequestBody SignRequest signRequest) {
         return signService.sign(signRequest);
     }
+
+    // INFO
+
 }

@@ -8,6 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 public class LoginRequest {
     private String StudentID;
-
     private String password;
 }
