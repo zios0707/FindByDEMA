@@ -27,7 +27,11 @@ public class JwtProvider {
     private final UserDetailsService userDetailsService;
 
     public String createAccessToken(String SID) {
-        return createToken(SID, "Access", 1 * 24 * 60L); // 1일
+        return createToken(SID, "Access", 24 * 60L); // 1시간 // 테스트 환경에선 24시간
+    }
+
+    public String createRefreshToken(String SID) {
+        return createToken(SID, "Refresh", 14 * 24 * 60L); // 14일
     }
 
     public String createToken(String SID, String type, Long expireTimeMs) {

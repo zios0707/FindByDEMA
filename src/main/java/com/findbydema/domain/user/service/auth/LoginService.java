@@ -30,7 +30,7 @@ public class LoginService {
         }
 
         String accessToken = provider.createAccessToken(user.getStudentId());
-        String refreshToken = "provider.createRefreshToken(user.getStudentId());"
+        String refreshToken = provider.createRefreshToken(user.getStudentId());
 
 
         return LoginResponse.builder()
