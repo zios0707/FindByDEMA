@@ -6,7 +6,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3305/mint1?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3305/websocket?characterEncoding=UTF-8&serverTimezone=UTC
 
     username: root
     password: root
@@ -23,4 +23,4 @@ spring:
       format_sql: true
 
 jwt :
-  secret: secretkekekekekekekekeekekeeekkkekekekkekkkekeekey
+  secret: 1234
