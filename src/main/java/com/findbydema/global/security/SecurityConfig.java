@@ -1,5 +1,7 @@
 package com.findbydema.global.security;
 
+import com.findbydema.domain.auth.repository.RefreshTokenRepository;
+import com.findbydema.domain.user.repository.UserRepository;
 import com.findbydema.global.security.jwt.JwtAuthFilter;
 import com.findbydema.global.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +46,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf().disable()/*
+                .antMatcher("/**").authorizeRequests()
+
+                .antMatchers("/api/board").permitAll()
+                .antMatchers("/api/chat").authenticated()
+                .antMatchers("/api/user").anonymous()
+                .anyRequest().authenticated()
+                .and()*/
+
                 .authorizeRequests(authz -> authz.anyRequest().permitAll())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
