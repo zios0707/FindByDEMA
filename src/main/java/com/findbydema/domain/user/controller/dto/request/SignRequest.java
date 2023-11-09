@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 public class SignRequest {
     private String nickname;
 
-    private String StudentID;
-
     private String email;
 
-    private String password;
-
     private String img;
+
+    private String sid;
+
+    private String password;
 }

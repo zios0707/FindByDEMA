@@ -15,8 +15,8 @@ public class UserFacade {
 
     public User getInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String SID = authentication.getName();
-        return repository.findByStudentId(SID)
+        String email = authentication.getName();
+        return repository.findByEmail(email)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 

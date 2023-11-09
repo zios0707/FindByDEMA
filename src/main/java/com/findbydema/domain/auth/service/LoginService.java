@@ -1,5 +1,7 @@
-package com.findbydema.domain.user.service.auth;
+package com.findbydema.domain.auth.service;
 
+import com.findbydema.domain.auth.entity.RefreshToken;
+import com.findbydema.domain.auth.repository.RefreshTokenRepository;
 import com.findbydema.domain.user.controller.dto.request.LoginRequest;
 import com.findbydema.domain.user.controller.dto.response.LoginResponse;
 import com.findbydema.domain.user.entity.User;
@@ -11,26 +13,34 @@ import com.findbydema.global.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class LoginService {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+    private final RefreshTokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider provider;
-    private final UserFacade facade;
 
     public LoginResponse login(LoginRequest request) {
 
-        User user = repository.findByStudentId(request.getStudentID())
+        User user = userRepository.findBySid(request.getSid())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
         if(passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw NotMatchPasswordException.EXCEPTION;
         }
 
-        String accessToken = provider.createAccessToken(user.getStudentId());
-        String refreshToken = provider.createRefreshToken(user.getStudentId());
+        String accessToken = provider.createAccessToken(user.getSid());
+        String refreshToken = provider.createRefreshToken(user.getSid());
+
+        tokenRepository.save(RefreshToken.builder()
+                .id(user.getSid())
+                .refreshToken(refreshToken)
+                .accessToken(accessToken)
+                .build());
 
 
         return LoginResponse.builder()
@@ -39,3 +49,4 @@ public class LoginService {
                 .build();
     }
 }
+
