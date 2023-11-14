@@ -11,7 +11,9 @@ public enum ErrorCode {
     INVALID_DATA(400, "data was corrupted"),
 
     USER_NOT_FOUND(404, "user not found"),
-    NOT_MATCH_PASS(404, "not match password"),
+    TOKEN_NOT_FOUND(404, "user not found"),
+    NOT_MATCH_PASS(404, "not matched password"),
+    NOT_MATCH_TOKEN(404, "not matched tokens"),
 
     EXIST_EMAIL(409, "this email was collide"),
     EXIST_SID(409, "this StudentID was collide");

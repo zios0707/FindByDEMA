@@ -9,6 +9,8 @@ import java.util.Optional;
 @Repository
 public interface RefreshTokenRepository extends CrudRepository<RefreshToken, String> {
 
-    Optional<RefreshToken> findByAccessToken(String token);
+    Optional<RefreshToken> findByAccessToken(String access);
+
+    Optional<RefreshToken> findByRefreshToken(String refresh);
 
 }

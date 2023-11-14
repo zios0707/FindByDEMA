@@ -29,24 +29,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String accessToken = extractAccessTokens(request);
         String refreshToken = extractRefreshTokens(request);
 
-        if(accessToken == null) {}
-        else if (jwtProvider.isOk(accessToken)) {
-            log.info("액세스 토큰 정상 확인.");
+        boolean access = jwtProvider.isOk(accessToken);
+        boolean refresh = jwtProvider.isOk(refreshToken);
+
+        if((refreshToken != null && accessToken != null) &&
+                (access || refresh)) {
+
+            if(!access && refresh) // 액세스 고장
+                accessToken = jwtProvider.reProvideAccessToken(refreshToken);
+
+            else if(access && !refresh) // 리프레쉬 고장
+                jwtProvider.reProvideRefreshToken(accessToken);
+
             Authentication authentication = jwtProvider.getAuthentication(accessToken);
-            log.info(jwtProvider.getSID(accessToken));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } else {
-            log.info("액세스 토큰 만료 및 오염 발견. 리프레쉬를 통한 액세스 재발급 실행");
-
-            accessToken = jwtProvider.reProvideAccessToken(accessToken, refreshToken);
-
-            if(accessToken != null) {
-                Authentication authentication = jwtProvider.getAuthentication(accessToken);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-
         }
-
 
         chain.doFilter(request, response);
     }

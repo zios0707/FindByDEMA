@@ -1,6 +1,8 @@
 package com.findbydema.global.security.jwt;
 
 import com.findbydema.domain.auth.entity.RefreshToken;
+import com.findbydema.domain.auth.exception.MismatchedTokenException;
+import com.findbydema.domain.auth.exception.TokenNotFoundException;
 import com.findbydema.domain.auth.repository.RefreshTokenRepository;
 import com.findbydema.domain.user.entity.User;
 import com.findbydema.domain.user.exception.UserNotFoundException;
@@ -96,31 +98,36 @@ public class JwtProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // 리프레시 - 액세스 재발급 구간
+    // 액세스 재발급 구간
+    @Transactional
+    public String reProvideAccessToken(String refreshToken) {
+        RefreshToken foundToken = tokenRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> TokenNotFoundException.EXCEPTION);
 
-    public String reProvideAccessToken(String accessToken, String refreshToken) {
-        Optional<RefreshToken> OfoundTokenInfo = tokenRepository.findByAccessToken(accessToken);
+        if(!refreshToken.equals(foundToken.getRefreshToken())) throw MismatchedTokenException.EXCEPTION;
 
+        User user = userRepository.findBySid(foundToken.getId())
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
-        if(OfoundTokenInfo.isEmpty()) return null;
-        RefreshToken foundTokenInfo = OfoundTokenInfo.get();
-        String foundRefresh = foundTokenInfo.getRefreshToken();
-        if (!isOk(foundRefresh)){
-            log.info("액세스, 리프레시 둘 다 개판");
-            return null;
-        }
-        Optional<User> Ouser = userRepository.findBySid(foundTokenInfo.getId());
+        String accessToken = createAccessToken(user.getSid());
+        foundToken.setAccessToken(accessToken);
 
-        if(!Ouser.isPresent()) {
-            log.info("유저가 없다요 맨");
-            return null;
-        }
-        User user = Ouser.get();
-        accessToken = createAccessToken(user.getSid());
-        tokenRepository.save(new RefreshToken(user.getSid(), refreshToken, accessToken));
-
-        log.info("정상 작동");
+        tokenRepository.save(foundToken);
         return accessToken;
+    }
+
+    @Transactional
+    public void reProvideRefreshToken(String accessToken) {
+        RefreshToken foundToken = tokenRepository.findByAccessToken(accessToken)
+                .orElseThrow(() -> TokenNotFoundException.EXCEPTION);
+
+        User user = userRepository.findBySid(foundToken.getId())
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        String refreshToken = createRefreshToken(user.getSid());
+        foundToken.setRefreshToken(refreshToken);
+
+        tokenRepository.save(foundToken);
     }
 
 }
