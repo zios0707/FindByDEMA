@@ -11,12 +11,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class UserFacade {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     public User getInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
-        return repository.findByEmail(email)
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    }
+
+    public User findBySid(String SID) {
+        return userRepository.findBySid(SID)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
