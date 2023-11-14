@@ -40,7 +40,7 @@ public class ChatController {
 
     @GetMapping(value = "/{roomId}")
     public Iterable<ChatRecord> getRecord(@PathVariable String roomId) {
-        return getMessagesService.execute(roomId);
+        return getMessageListService.execute(roomId);
     }
 
 
