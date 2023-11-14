@@ -5,7 +5,6 @@ import com.findbydema.domain.auth.repository.RefreshTokenRepository;
 import com.findbydema.domain.user.controller.dto.request.LoginRequest;
 import com.findbydema.domain.user.controller.dto.response.LoginResponse;
 import com.findbydema.domain.user.entity.User;
-import com.findbydema.domain.user.exception.UserNotFoundException;
 import com.findbydema.domain.user.exception.auth.NotMatchPasswordException;
 import com.findbydema.domain.user.repository.UserRepository;
 import com.findbydema.domain.user.service.UserFacade;
@@ -19,17 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class LoginService {
-    private final UserRepository userRepository;
+    private final UserFacade userFacade;
     private final RefreshTokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider provider;
 
-    public LoginResponse login(LoginRequest request) {
+    public LoginResponse login(LoginRequest loginRequest) {
 
-        User user = userRepository.findBySid(request.getSid())
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        User user = userFacade.findBySid(loginRequest.getSid());
 
-        if(passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        if(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw NotMatchPasswordException.EXCEPTION;
         }
 
