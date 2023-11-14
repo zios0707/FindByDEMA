@@ -1,7 +1,7 @@
 package com.findbydema.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.findbydema.domain.livechat.entity.connectionEntity.JoinedChatRooms;
+import com.findbydema.domain.livechat.entity.ChatRoom;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,7 +28,7 @@ public class User implements UserDetails {
 
     private String nickname;// 사용할 닉네임
 
-    private String sid;// X(학년)X(반)XX(번호) 형식으로 저장 예) 1101 -> 1학년 1반 1번
+    private String sid;     // X(학년)X(반)XX(번호) 형식으로 저장 예) 1101 -> 1학년 1반 1번
 
     private String email;   // 이메일
 
@@ -39,10 +39,8 @@ public class User implements UserDetails {
 
     //private Date makeDate;  // 계정 생성일
 
-/*
-    @OneToMany(mappedBy = "joinedUser")
-    private List<JoinedChatRooms> joinedChatRooms = new ArrayList<>();
-*/
+    @ManyToMany(mappedBy = "users")
+    private List<ChatRoom> chatRooms;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -88,5 +86,4 @@ public class User implements UserDetails {
         this.password = password;
         this.img = img;
     }
-
 }

@@ -1,37 +1,17 @@
 package com.findbydema.domain.livechat.repository;
 
-import com.findbydema.domain.livechat.entity.DTO.ChatRoomDTO;
+import com.findbydema.domain.livechat.entity.ChatRoom;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
 
+@RedisHash
 @Repository
-public class ChatRoomRepository {
+public interface ChatRoomRepository extends CrudRepository<ChatRoom, String> {
 
-    private Map<String, ChatRoomDTO> chatRoomDTOMap;
-
-    @PostConstruct
-    private void init() {
-        chatRoomDTOMap = new LinkedHashMap<>();
-    }
-
-    public List<ChatRoomDTO> findAllRooms() {
-        //채팅방 생성 최근 순으로 반환함
-        List<ChatRoomDTO> result = new ArrayList<>(chatRoomDTOMap.values());
-        Collections.reverse(result);
-
-        return result;
-    }
-
-    public ChatRoomDTO findRoomById(String id) {
-        return chatRoomDTOMap.get(id);
-    }
-
-    public ChatRoomDTO createChatRoomDTO(String name) {
-        ChatRoomDTO room = ChatRoomDTO.create(name);
-        chatRoomDTOMap.put(room.getRoomId(), room);
-
-        return room;
-    }
+    Optional<ChatRoom> findById(String s);
+    Optional<ChatRoom> findByRoomId(String s);
 }

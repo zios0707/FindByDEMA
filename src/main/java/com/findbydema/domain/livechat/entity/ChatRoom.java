@@ -1,29 +1,33 @@
 package com.findbydema.domain.livechat.entity;
 
-import com.findbydema.domain.livechat.entity.connectionEntity.JoinedChatRooms;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.findbydema.domain.user.entity.User;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatRoom_id")
+    @Column(name = "chat_room_id")
     private String id;
 
     private String roomId;
 
     private String roomName;
 
-    private String chatMentor;
+    @JsonIgnore
+    @ManyToMany
+    private List<User> users;
 
-    @OneToMany(mappedBy = "joinedChatRoom")
-    private List<JoinedChatRooms> joinedChatRooms = new ArrayList<>();
+    public ChatRoom(String roomName, String roomId) {
+        this.roomName = roomName;
+        this.roomId = roomId;
+    }
 
 }
