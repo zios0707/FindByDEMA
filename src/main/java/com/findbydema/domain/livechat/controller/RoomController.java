@@ -1,24 +1,25 @@
 package com.findbydema.domain.livechat.controller;
 
 import com.findbydema.domain.livechat.entity.DTO.ChatRoomDTO;
+import com.findbydema.domain.livechat.entity.ChatRoom;
 import com.findbydema.domain.livechat.repository.ChatRoomRepository;
+import com.findbydema.domain.livechat.service.CreateRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/chat/room")
+@RequestMapping(value = "/api/chat/")
 public class RoomController {
 
     private final ChatRoomRepository chatRoomRepository;
 
-    @GetMapping(value = "/")
-    public List<ChatRoomDTO> getRooms() {
-        return chatRoomRepository.findAllRooms();
+    @GetMapping("/")
+    public Iterable<ChatRoom> getRooms() {
+        return chatRoomRepository.findAll();
     }
 
 }
