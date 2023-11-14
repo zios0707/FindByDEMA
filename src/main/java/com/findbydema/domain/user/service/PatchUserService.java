@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PatchUserService {
 
-    private final UserFacade facade;
-    private final UserRepository repository;
+    private final UserFacade userFacade;
+    private final UserRepository userRepository;
 
     public void execute(PatchUserRequest request) {
-        User user = facade.getInfo();
+        User user = userFacade.getInfo();
 
         if(!request.getEmail().isEmpty()) {
             user.setEmail(request.getEmail());
@@ -29,7 +29,7 @@ public class PatchUserService {
             user.setImg(request.getImg());
         }
 
-        repository.save(user);
+        userRepository.save(user);
     }
 
 
