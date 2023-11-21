@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 @SpringBootTest
 class FIndByDemaApplicationTests {
 
@@ -36,7 +32,7 @@ class FIndByDemaApplicationTests {
 		for (ChatRecord rec: list) {
 			System.out.print(rec.getRoomId());
 			System.out.print(" / ");
-			System.out.print(rec.getWriterId());
+			System.out.print(rec.getWriterSid());
 			System.out.print(" / ");
 			System.out.println(rec.getContent());
 		}

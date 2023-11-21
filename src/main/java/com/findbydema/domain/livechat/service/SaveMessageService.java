@@ -14,7 +14,7 @@ public class SaveMessageService {
 
     public void execute(MessageRequest message) {
         ChatRecord chatRecord = ChatRecord.builder()
-                .writerId(message.getWriter())
+                .writerSid(message.getWriter())
                 .content(message.getContent())
                 .roomId(message.getRoomId())
                 .build();

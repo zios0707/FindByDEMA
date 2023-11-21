@@ -1,8 +1,6 @@
 package com.findbydema.domain.livechat.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
@@ -17,20 +15,21 @@ import java.time.LocalDateTime;
 public class ChatRecord {
 
     @Id
-    private String id;
+    @Column(name = "record_id")
+    private Long id;
 
     @Indexed // 이거 안해주면 findAllByRoomId 작동을 안함
     private String roomId;
 
-    private String writerId;
+    private String writerSid;
 
     private String content;
 
     private LocalDateTime sendDate;
 
-    public ChatRecord(String roomId, String writerId, String content) {
+    public ChatRecord(String roomId, String writerSid, String content) {
         this.roomId = roomId;
-        this.writerId = writerId;
+        this.writerSid = writerSid;
         this.content = content;
         this.sendDate = LocalDateTime.now();
     }

@@ -1,6 +1,7 @@
 package com.findbydema.domain.livechat.controller;
 
-import com.findbydema.domain.livechat.entity.DTO.ChatRoomDTO;
+import com.findbydema.domain.livechat.controller.dto.request.CreateRoomRequest;
+import com.findbydema.domain.livechat.controller.dto.response.ChattingRoomRequest;
 import com.findbydema.domain.livechat.entity.ChatRoom;
 import com.findbydema.domain.livechat.repository.ChatRoomRepository;
 import com.findbydema.domain.livechat.service.CreateRoomService;
@@ -16,10 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoomController {
 
     private final ChatRoomRepository chatRoomRepository;
+    private final CreateRoomService createRoomService;
 
     @GetMapping("/")
     public Iterable<ChatRoom> getRooms() {
         return chatRoomRepository.findAll();
+    }
+
+    @PostMapping("/")
+    public ChattingRoomRequest createRoom(CreateRoomRequest createRoomRequest) {
+        return createRoomService.execute(createRoomRequest);
     }
 
 }
