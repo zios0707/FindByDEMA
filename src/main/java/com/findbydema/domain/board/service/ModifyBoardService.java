@@ -3,6 +3,7 @@ package com.findbydema.domain.board.service;
 import com.findbydema.domain.board.controller.dto.request.ModifyBoardRequest;
 import com.findbydema.domain.board.controller.dto.response.BoardResponse;
 import com.findbydema.domain.board.entity.Board;
+import com.findbydema.domain.board.exception.NotOwnerException;
 import com.findbydema.domain.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,17 +18,23 @@ public class ModifyBoardService {
     private final BoardFacade boardFacade;
 
     public BoardResponse execute(ModifyBoardRequest modifyBoardRequest, String viewId) {
+
+
         Board board = boardFacade.getBoardByViewId(viewId);
-        board.modify(
-                modifyBoardRequest.getTitle(),
-                modifyBoardRequest.getSubtitle()
-        );
 
-        boardRepository.save(board);
+        if(boardFacade.isOwn(board)) {
+            board.modify(
+                    modifyBoardRequest.getTitle(),
+                    modifyBoardRequest.getSubtitle()
+            );
 
-        return BoardResponse.builder()
-                .viewId(viewId)
-                .build();
+            boardRepository.save(board);
+
+            return BoardResponse.builder()
+                    .viewId(viewId)
+                    .build();
+        }else throw NotOwnerException;
+
     }
 
 

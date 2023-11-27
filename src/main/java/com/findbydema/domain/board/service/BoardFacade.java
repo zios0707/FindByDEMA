@@ -1,7 +1,10 @@
 package com.findbydema.domain.board.service;
 
 import com.findbydema.domain.board.entity.Board;
+import com.findbydema.domain.board.exception.NotExistViewIdException;
 import com.findbydema.domain.board.repository.BoardRepository;
+import com.findbydema.domain.user.entity.User;
+import com.findbydema.domain.user.service.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +13,15 @@ import org.springframework.stereotype.Service;
 public class BoardFacade {
 
     private final BoardRepository boardRepository;
+    private final UserFacade userFacade;
 
     public Board getBoardByViewId(String viewId) {
         return boardRepository.findByViewId(viewId)
-                .orElseThrow(() -> new RuntimeException("보드 뷰아이디 버그"));
+                .orElseThrow(() -> NotExistViewIdException.EXCEPTION);
+    }
+
+    public boolean isOwn(Board board) {
+        User ownUser = userFacade.getInfo();
+        return board.getWriterSid().equals(ownUser.getSid());
     }
 }
