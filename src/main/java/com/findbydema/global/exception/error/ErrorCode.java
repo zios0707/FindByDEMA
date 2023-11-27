@@ -10,7 +10,7 @@ public enum ErrorCode {
     COMPACT_FAIL( 400, "cannot compact with that data"),
     INVALID_DATA(400, "data was corrupted"),
 
-    NOT_OWNER(403, "not the owner of this")
+    NOT_OWNER(403, "not the owner of this"),
 
     USER_NOT_FOUND(404, "user not found"),
     TOKEN_NOT_FOUND(404, "user not found"),
