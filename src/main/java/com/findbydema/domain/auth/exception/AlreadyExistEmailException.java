@@ -1,4 +1,4 @@
-package com.findbydema.domain.user.exception.auth;
+package com.findbydema.domain.auth.exception;
 
 import com.findbydema.global.exception.CustomException;
 import com.findbydema.global.exception.error.ErrorCode;
