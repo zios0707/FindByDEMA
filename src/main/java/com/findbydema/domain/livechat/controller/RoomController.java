@@ -6,10 +6,7 @@ import com.findbydema.domain.livechat.entity.ChatRoom;
 import com.findbydema.domain.livechat.repository.ChatRoomRepository;
 import com.findbydema.domain.livechat.service.CreateRoomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +22,7 @@ public class RoomController {
     }
 
     @PostMapping("/")
-    public ChattingRoomRequest createRoom(CreateRoomRequest createRoomRequest) {
+    public ChattingRoomRequest createRoom(@RequestBody CreateRoomRequest createRoomRequest) {
         return createRoomService.execute(createRoomRequest);
     }
 
