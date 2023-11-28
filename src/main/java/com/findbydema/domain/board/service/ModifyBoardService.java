@@ -33,7 +33,7 @@ public class ModifyBoardService {
             return BoardResponse.builder()
                     .viewId(viewId)
                     .build();
-        }else throw NotOwnerException;
+        }else throw NotOwnerException.EXCEPTION;
 
     }
 
