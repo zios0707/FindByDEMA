@@ -1,9 +1,9 @@
-package com.findbydema.domain.board.boardUtil.comment.controller;
+package com.findbydema.domain.boardFunc.comment.controller;
 
-import com.findbydema.domain.board.boardUtil.comment.controller.dto.request.CreateCommentRequest;
-import com.findbydema.domain.board.boardUtil.comment.entity.Comment;
-import com.findbydema.domain.board.boardUtil.comment.service.CreateCommentService;
-import com.findbydema.domain.board.boardUtil.comment.service.GetListCommentService;
+import com.findbydema.domain.boardFunc.comment.controller.dto.request.CreateCommentRequest;
+import com.findbydema.domain.boardFunc.comment.entity.Comment;
+import com.findbydema.domain.boardFunc.comment.service.CreateCommentService;
+import com.findbydema.domain.boardFunc.comment.service.GetListCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

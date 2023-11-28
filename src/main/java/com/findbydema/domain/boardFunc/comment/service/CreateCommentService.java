@@ -1,9 +1,8 @@
-package com.findbydema.domain.board.boardUtil.comment.service;
+package com.findbydema.domain.boardFunc.comment.service;
 
-import com.findbydema.domain.board.boardUtil.comment.controller.dto.request.CreateCommentRequest;
-import com.findbydema.domain.board.boardUtil.comment.entity.Comment;
-import com.findbydema.domain.board.boardUtil.comment.repository.CommentRepository;
-import com.findbydema.domain.board.repository.BoardRepository;
+import com.findbydema.domain.boardFunc.comment.controller.dto.request.CreateCommentRequest;
+import com.findbydema.domain.boardFunc.comment.entity.Comment;
+import com.findbydema.domain.boardFunc.comment.repository.CommentRepository;
 import com.findbydema.domain.board.service.BoardFacade;
 import com.findbydema.domain.user.service.UserFacade;
 import com.findbydema.global.helper.MakeIdHelper;

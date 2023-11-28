@@ -1,7 +1,7 @@
 package com.findbydema.domain.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.findbydema.domain.board.boardUtil.comment.entity.Comment;
+import com.findbydema.domain.boardFunc.comment.entity.Comment;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

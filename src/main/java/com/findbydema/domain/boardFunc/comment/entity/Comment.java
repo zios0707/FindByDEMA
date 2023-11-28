@@ -1,4 +1,4 @@
-package com.findbydema.domain.board.boardUtil.comment.entity;
+package com.findbydema.domain.boardFunc.comment.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.findbydema.domain.board.entity.Board;

@@ -1,4 +1,4 @@
-package com.findbydema.domain.board.boardUtil.comment.controller.dto.request;
+package com.findbydema.domain.boardFunc.comment.controller.dto.request;
 
 import lombok.Getter;
 
