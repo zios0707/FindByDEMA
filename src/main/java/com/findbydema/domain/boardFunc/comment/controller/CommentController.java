@@ -6,6 +6,7 @@ import com.findbydema.domain.boardFunc.comment.controller.dto.response.CommentRe
 import com.findbydema.domain.boardFunc.comment.entity.Comment;
 import com.findbydema.domain.boardFunc.comment.service.CreateCommentService;
 import com.findbydema.domain.boardFunc.comment.service.GetListCommentService;
+import com.findbydema.domain.boardFunc.comment.service.PatchCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class CommentController {
 
     private final CreateCommentService createCommentService;
     private final GetListCommentService getListCommentService;
+    private final PatchCommentService patchCommentService;
 
     @PostMapping("/post")
     public void PostComment(@PathVariable String viewId, @RequestBody CreateCommentRequest createCommentRequest) {
@@ -26,5 +28,10 @@ public class CommentController {
     @GetMapping("/comments")
     public List<CommentResponse> GetListComment(@PathVariable String viewId) {
         return getListCommentService.execute(viewId);
+    }
+
+    @PatchMapping("/{commentId}")
+    public void PatchComment(@PathVariable String commentId, @RequestBody PatchCommentRequest patchCommentRequest) {
+        patchCommentService.execute(commentId, patchCommentRequest);
     }
 }
