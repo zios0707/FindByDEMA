@@ -1,6 +1,6 @@
 package com.findbydema.global.helper;
 
-import com.findbydema.domain.board.boardUtil.comment.repository.CommentRepository;
+import com.findbydema.domain.boardFunc.comment.repository.CommentRepository;
 import com.findbydema.domain.board.repository.BoardRepository;
 import com.findbydema.domain.livechat.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
