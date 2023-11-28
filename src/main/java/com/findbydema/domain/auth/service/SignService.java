@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -34,7 +36,8 @@ public class SignService {
                 request.getSid(),
                 request.getEmail(),
                 request.getPassword(),
-                request.getImg()
+                request.getImg(),
+                new Date()
         ));
 
         return loginService.login(LoginRequest.builder() // 정보가 유효하니 바로 로그인으로 진행
