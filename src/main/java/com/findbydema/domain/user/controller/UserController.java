@@ -1,7 +1,7 @@
 package com.findbydema.domain.user.controller;
 
 import com.findbydema.domain.user.controller.dto.request.PatchUserRequest;
-import com.findbydema.domain.user.controller.dto.response.GetResponse;
+import com.findbydema.domain.user.controller.dto.response.UserResponse;
 import com.findbydema.domain.user.entity.User;
 import com.findbydema.domain.user.service.PatchUserService;
 import com.findbydema.domain.user.service.UserFacade;
@@ -20,10 +20,10 @@ public class UserController {
     // COMMON
 
     @GetMapping("/")
-    public GetResponse getMyPage() {
+    public UserResponse getMyPage() {
         User user = userFacade.getInfo();
 
-        return GetResponse.builder()
+        return UserResponse.builder()
                 .nickname(user.getNickname())
                 .sid(user.getSid())
                 .img(user.getImg())
@@ -32,10 +32,10 @@ public class UserController {
     }
 
     @GetMapping("/{SID}")
-    public GetResponse getFromSID(@PathVariable String SID) {
+    public UserResponse getFromSID(@PathVariable String SID) {
         User user = userFacade.findBySid(SID);
 
-        return GetResponse.builder()
+        return UserResponse.builder()
                 .nickname(user.getNickname())
                 .sid(user.getSid())
                 .img(user.getImg())
