@@ -1,6 +1,7 @@
 package com.findbydema.domain.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.findbydema.domain.board.boardUtil.comment.entity.Comment;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,9 +34,9 @@ public class Board {
     @Column(name = "num_of_comments")
     private Long comment = 0L;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "comment_board")
-//    private List<Comment> comments = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "comment_board")
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "views", nullable = false)
     private Long views = 0L;
