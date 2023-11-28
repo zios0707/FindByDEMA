@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class User implements UserDetails {
 
     private String img;     // 이미지 링크
 
-    //private Date makeDate;  // 계정 생성일
+    private Date makeDate;  // 계정 생성일
 
     @ManyToMany(mappedBy = "users")
     private List<ChatRoom> chatRooms;
@@ -79,11 +80,12 @@ public class User implements UserDetails {
     }
 
     @Builder
-    public User(String nickname, String sid, String email, String password, String img) {
+    public User(String nickname, String sid, String email, String password, String img, Date makeDate) {
         this.nickname = nickname;
         this.sid = sid;
         this.email = email;
         this.password = password;
         this.img = img;
+        this.makeDate = makeDate;
     }
 }
