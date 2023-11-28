@@ -1,5 +1,6 @@
 package com.findbydema.domain.user.service;
 
+import com.findbydema.domain.user.controller.dto.response.UserResponse;
 import com.findbydema.domain.user.entity.User;
 import com.findbydema.domain.user.exception.UserNotFoundException;
 import com.findbydema.domain.user.repository.UserRepository;
@@ -25,6 +26,16 @@ public class UserFacade {
     public User findBySid(String SID) {
         return userRepository.findBySid(SID)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    }
+
+    public UserResponse sidToResponse(String sid) {
+        User user = findBySid(sid);
+        return UserResponse.builder()
+                .img(user.getImg())
+                .sid(user.getSid())
+                .makeDate(new Date())
+                .nickname(user.getNickname())
+                .build();
     }
 
 
