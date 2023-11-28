@@ -6,6 +6,7 @@ import com.findbydema.domain.board.controller.dto.response.BoardResponse;
 import com.findbydema.domain.board.controller.dto.response.GetBoardResponse;
 import com.findbydema.domain.board.service.CreateBoardService;
 import com.findbydema.domain.board.service.DeleteBoardService;
+import com.findbydema.domain.board.service.GetBoardService;
 import com.findbydema.domain.board.service.ModifyBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class BoardController {
     private final CreateBoardService createBoardService;
     private final ModifyBoardService modifyBoardService;
     private final DeleteBoardService deleteBoardService;
+    private final GetBoardService getBoardService;
 
     @PostMapping("/post")
     public BoardResponse CreateBoard(@RequestBody CreateBoardRequest createBoardRequest) {
@@ -31,7 +33,7 @@ public class BoardController {
 
     @GetMapping("/{viewId}")
     public GetBoardResponse getBoard(@PathVariable String viewId) {
-        return
+        return getBoardService.execute(viewId);
     }
 
     @DeleteMapping("/{viewId}")
