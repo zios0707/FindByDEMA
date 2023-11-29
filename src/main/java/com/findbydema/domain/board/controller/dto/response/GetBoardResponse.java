@@ -1,5 +1,6 @@
 package com.findbydema.domain.board.controller.dto.response;
 
+import com.findbydema.domain.board.entity.Board;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,5 +17,16 @@ public class GetBoardResponse {
     private Long views;
     private Long likes;
     private boolean modified;
+
+    public GetBoardResponse(Board board) {
+        this.title = board.getTitle();
+        this.viewId = board.getViewId();
+        this.writerSid = board.getWriterSid();
+        this.date = board.getDate();
+        this.comment = board.getComment();
+        this.views = board.getViews();
+        this.likes = board.getLikes();
+        this.modified = board.getModified();
+    }
 
 }

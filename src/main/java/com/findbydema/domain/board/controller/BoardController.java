@@ -4,12 +4,11 @@ import com.findbydema.domain.board.controller.dto.request.CreateBoardRequest;
 import com.findbydema.domain.board.controller.dto.request.ModifyBoardRequest;
 import com.findbydema.domain.board.controller.dto.response.BoardResponse;
 import com.findbydema.domain.board.controller.dto.response.GetBoardResponse;
-import com.findbydema.domain.board.service.CreateBoardService;
-import com.findbydema.domain.board.service.DeleteBoardService;
-import com.findbydema.domain.board.service.GetBoardService;
-import com.findbydema.domain.board.service.ModifyBoardService;
+import com.findbydema.domain.board.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/board")
@@ -19,11 +18,17 @@ public class BoardController {
     private final CreateBoardService createBoardService;
     private final ModifyBoardService modifyBoardService;
     private final DeleteBoardService deleteBoardService;
+    private final GetListBoardService getListBoardService;
     private final GetBoardService getBoardService;
 
     @PostMapping("/post")
     public BoardResponse CreateBoard(@RequestBody CreateBoardRequest createBoardRequest) {
         return createBoardService.execute(createBoardRequest);
+    }
+
+    @GetMapping("/page/{offset}")
+    public List<BoardResponse> GetListBoard(@PathVariable Long offset) {
+        return getListBoardService.execute(offset);
     }
 
     @PatchMapping("/{viewId}")
