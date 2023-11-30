@@ -8,6 +8,7 @@ import com.findbydema.domain.board.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class BoardController {
     }
 
     @GetMapping("/page/{offset}")
-    public List<BoardResponse> GetListBoard(@PathVariable Long offset) {
+    public List<GetBoardResponse> GetListBoard(@PathVariable Long offset) {
         return getListBoardService.execute(offset);
     }
 
@@ -37,8 +38,8 @@ public class BoardController {
     }
 
     @GetMapping("/{viewId}")
-    public GetBoardResponse getBoard(@PathVariable String viewId) {
-        return getBoardService.execute(viewId);
+    public GetBoardResponse getBoard(@PathVariable String viewId, @CookieValue(name = "viewCount", required = false) String lookList, HttpServletResponse response) {
+        return getBoardService.execute(viewId, response, lookList);
     }
 
     @DeleteMapping("/{viewId}")
