@@ -2,7 +2,7 @@ package com.findbydema.domain.board.controller;
 
 import com.findbydema.domain.board.controller.dto.request.CreateBoardRequest;
 import com.findbydema.domain.board.controller.dto.request.ModifyBoardRequest;
-import com.findbydema.domain.board.controller.dto.response.BoardResponse;
+import com.findbydema.domain.board.controller.dto.response.BoardViewIdResponse;
 import com.findbydema.domain.board.controller.dto.response.GetBoardResponse;
 import com.findbydema.domain.board.service.*;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class BoardController {
     private final GetBoardService getBoardService;
 
     @PostMapping("/post")
-    public BoardResponse CreateBoard(@RequestBody CreateBoardRequest createBoardRequest) {
+    public BoardViewIdResponse CreateBoard(@RequestBody CreateBoardRequest createBoardRequest) {
         return createBoardService.execute(createBoardRequest);
     }
 
@@ -33,7 +33,7 @@ public class BoardController {
     }
 
     @PatchMapping("/{viewId}")
-    public BoardResponse ModifyBoard(@PathVariable String viewId, @RequestBody ModifyBoardRequest modifyBoardRequest) {
+    public BoardViewIdResponse ModifyBoard(@PathVariable String viewId, @RequestBody ModifyBoardRequest modifyBoardRequest) {
         return modifyBoardService.execute(modifyBoardRequest, viewId);
     }
 

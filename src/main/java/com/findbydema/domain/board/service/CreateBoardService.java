@@ -1,7 +1,7 @@
 package com.findbydema.domain.board.service;
 
 import com.findbydema.domain.board.controller.dto.request.CreateBoardRequest;
-import com.findbydema.domain.board.controller.dto.response.BoardResponse;
+import com.findbydema.domain.board.controller.dto.response.BoardViewIdResponse;
 import com.findbydema.domain.board.entity.Board;
 import com.findbydema.domain.board.repository.BoardRepository;
 import com.findbydema.domain.user.service.UserFacade;
@@ -21,7 +21,7 @@ public class CreateBoardService {
     private final MakeIdHelper helper;
     private final UserFacade userFacade;
 
-    public BoardResponse execute(CreateBoardRequest createBoardRequest) {
+    public BoardViewIdResponse execute(CreateBoardRequest createBoardRequest) {
         Board board = Board.builder()
                 .date(new Date())
                 .path(helper.getBoardId())
@@ -32,7 +32,7 @@ public class CreateBoardService {
 
         boardRepository.save(board);
 
-        return BoardResponse.builder()
+        return BoardViewIdResponse.builder()
                 .viewId(board.getViewId())
                 .build();
 

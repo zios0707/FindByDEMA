@@ -1,7 +1,7 @@
 package com.findbydema.domain.board.service;
 
 import com.findbydema.domain.board.controller.dto.request.ModifyBoardRequest;
-import com.findbydema.domain.board.controller.dto.response.BoardResponse;
+import com.findbydema.domain.board.controller.dto.response.BoardViewIdResponse;
 import com.findbydema.domain.board.entity.Board;
 import com.findbydema.domain.board.exception.NotOwnerException;
 import com.findbydema.domain.board.repository.BoardRepository;
@@ -17,7 +17,7 @@ public class ModifyBoardService {
     private final BoardRepository boardRepository;
     private final BoardFacade boardFacade;
 
-    public BoardResponse execute(ModifyBoardRequest modifyBoardRequest, String viewId) {
+    public BoardViewIdResponse execute(ModifyBoardRequest modifyBoardRequest, String viewId) {
 
 
         Board board = boardFacade.getBoardByViewId(viewId);
@@ -30,7 +30,7 @@ public class ModifyBoardService {
 
             boardRepository.save(board);
 
-            return BoardResponse.builder()
+            return BoardViewIdResponse.builder()
                     .viewId(viewId)
                     .build();
         }else throw NotOwnerException.EXCEPTION;

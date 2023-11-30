@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class BoardResponse {
+public class BoardViewIdResponse {
     private String viewId;
 }
