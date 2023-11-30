@@ -46,6 +46,16 @@ public class ChatController {
         template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 
+    @MessageMapping(value = "/chat/quit")
+    public void quit(@PathVariable String roomId, MessageRequest message) {
+        message.setRoomId(roomId);
+        message.setWriter(userFacade.getInfo().getSid());
+        message.setContent(message.getWriter() + "님이 채팅방에서 나갔습니다.");
+        saveMessageService.execute(message);
+
+        template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
+    }
+
 
     @GetMapping(value = "/")
     public Iterable<ChatRecord> getRecord(@PathVariable String roomId) {
