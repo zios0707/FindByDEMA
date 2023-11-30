@@ -57,7 +57,7 @@ public class ChatController {
     }
 
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/records")
     public Iterable<ChatRecord> getRecord(@PathVariable String roomId) {
         return getMessageListService.execute(roomId);
     }
