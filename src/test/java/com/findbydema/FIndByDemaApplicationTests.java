@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 class FIndByDemaApplicationTests {
 
@@ -26,7 +28,7 @@ class FIndByDemaApplicationTests {
 		recordRepository.save(record3);
 		recordRepository.save(record4);
 
-		Iterable<ChatRecord> list = recordRepository.findAllByRoomId("1");
+		List<ChatRecord> list = recordRepository.findAllByRoomId("1");
 		System.out.println(list.toString());
 
 		for (ChatRecord rec: list) {

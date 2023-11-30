@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/chat/{roomId}")
@@ -58,7 +60,7 @@ public class ChatController {
 
 
     @GetMapping(value = "/records")
-    public Iterable<ChatRecord> getRecord(@PathVariable String roomId) {
+    public List<ChatRecord> getRecord(@PathVariable String roomId) {
         return getMessageListService.execute(roomId);
     }
 

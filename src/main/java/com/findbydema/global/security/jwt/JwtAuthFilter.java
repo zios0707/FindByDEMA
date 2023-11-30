@@ -1,5 +1,10 @@
 package com.findbydema.global.security.jwt;
 
+import com.findbydema.domain.auth.entity.RefreshToken;
+import com.findbydema.domain.auth.repository.RefreshTokenRepository;
+import com.findbydema.domain.user.entity.User;
+import com.findbydema.domain.user.exception.UserNotFoundException;
+import com.findbydema.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
