@@ -2,14 +2,12 @@ package com.findbydema.domain.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.findbydema.domain.boardFunc.comment.entity.Comment;
+import com.findbydema.domain.user.entity.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +34,7 @@ public class Board {
 
     @JsonIgnore
     @OneToMany(mappedBy = "comment_board")
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments;
 
     @Column(name = "views", nullable = false)
     private Long views = 0L;
@@ -44,9 +42,9 @@ public class Board {
     @Column(name = "likes", nullable = false)
     private Long likes = 0L;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "like_board")
-//    private List<LikeBoards> likeBoards = new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany
+    private List<User> like_users;
 
     @Column(name = "modified", nullable = false)
     private Boolean modified = false;

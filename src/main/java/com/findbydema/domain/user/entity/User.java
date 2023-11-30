@@ -1,6 +1,7 @@
 package com.findbydema.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.findbydema.domain.board.entity.Board;
 import com.findbydema.domain.livechat.entity.ChatRoom;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,6 +43,9 @@ public class User implements UserDetails {
 
     @ManyToMany(mappedBy = "users")
     private List<ChatRoom> chatRooms;
+
+    @ManyToMany(mappedBy = "like_users")
+    private List<Board> boards;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
