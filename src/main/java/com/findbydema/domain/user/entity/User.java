@@ -41,7 +41,7 @@ public class User implements UserDetails {
 
     private Date makeDate;  // 계정 생성일
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "join_users")
     private List<ChatRoom> chatRooms;
 
     @ManyToMany(mappedBy = "like_users")

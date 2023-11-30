@@ -25,7 +25,7 @@ public class ChatRoom {
 
     @JsonIgnore
     @ManyToMany
-    private List<User> users;
+    private List<User> join_users;
 
     public ChatRoom(String roomName, String roomId) {
         this.roomName = roomName;
