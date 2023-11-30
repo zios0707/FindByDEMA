@@ -2,7 +2,9 @@ package com.findbydema.domain.livechat.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.findbydema.domain.user.entity.User;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;

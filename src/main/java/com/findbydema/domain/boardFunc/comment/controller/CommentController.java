@@ -3,7 +3,6 @@ package com.findbydema.domain.boardFunc.comment.controller;
 import com.findbydema.domain.boardFunc.comment.controller.dto.request.CreateCommentRequest;
 import com.findbydema.domain.boardFunc.comment.controller.dto.request.PatchCommentRequest;
 import com.findbydema.domain.boardFunc.comment.controller.dto.response.CommentResponse;
-import com.findbydema.domain.boardFunc.comment.entity.Comment;
 import com.findbydema.domain.boardFunc.comment.service.CreateCommentService;
 import com.findbydema.domain.boardFunc.comment.service.DeleteCommentService;
 import com.findbydema.domain.boardFunc.comment.service.GetListCommentService;

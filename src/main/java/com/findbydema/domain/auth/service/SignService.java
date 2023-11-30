@@ -1,11 +1,11 @@
 package com.findbydema.domain.auth.service;
 
+import com.findbydema.domain.auth.exception.AlreadyExistEmailException;
+import com.findbydema.domain.auth.exception.AlreadyExistSIDException;
 import com.findbydema.domain.user.controller.dto.request.LoginRequest;
 import com.findbydema.domain.user.controller.dto.request.SignRequest;
 import com.findbydema.domain.user.controller.dto.response.LoginResponse;
 import com.findbydema.domain.user.entity.User;
-import com.findbydema.domain.auth.exception.AlreadyExistEmailException;
-import com.findbydema.domain.auth.exception.AlreadyExistSIDException;
 import com.findbydema.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

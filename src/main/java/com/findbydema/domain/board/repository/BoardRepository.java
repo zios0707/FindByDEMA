@@ -2,7 +2,6 @@ package com.findbydema.domain.board.repository;
 
 import com.findbydema.domain.board.entity.Board;
 import com.findbydema.domain.user.entity.User;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

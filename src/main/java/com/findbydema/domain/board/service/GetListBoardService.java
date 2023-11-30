@@ -1,7 +1,6 @@
 package com.findbydema.domain.board.service;
 
 import com.findbydema.domain.board.collection.BoardCollection;
-import com.findbydema.domain.board.controller.dto.response.BoardResponse;
 import com.findbydema.domain.board.controller.dto.response.GetBoardResponse;
 import com.findbydema.domain.board.entity.Board;
 import com.findbydema.domain.board.repository.BoardRepository;

@@ -1,11 +1,11 @@
 package com.findbydema.domain.auth.service;
 
 import com.findbydema.domain.auth.entity.RefreshToken;
+import com.findbydema.domain.auth.exception.NotMatchPasswordException;
 import com.findbydema.domain.auth.repository.RefreshTokenRepository;
 import com.findbydema.domain.user.controller.dto.request.LoginRequest;
 import com.findbydema.domain.user.controller.dto.response.LoginResponse;
 import com.findbydema.domain.user.entity.User;
-import com.findbydema.domain.auth.exception.NotMatchPasswordException;
 import com.findbydema.domain.user.service.UserFacade;
 import com.findbydema.global.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;

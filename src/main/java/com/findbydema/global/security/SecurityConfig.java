@@ -1,7 +1,5 @@
 package com.findbydema.global.security;
 
-import com.findbydema.domain.auth.repository.RefreshTokenRepository;
-import com.findbydema.domain.user.repository.UserRepository;
 import com.findbydema.global.security.jwt.JwtAuthFilter;
 import com.findbydema.global.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;

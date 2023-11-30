@@ -1,7 +1,6 @@
 package com.findbydema.domain.boardFunc.comment.controller.dto.response;
 
 import com.findbydema.domain.user.controller.dto.response.UserResponse;
-import com.findbydema.domain.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 

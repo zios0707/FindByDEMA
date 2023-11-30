@@ -1,6 +1,5 @@
 package com.findbydema.domain.board.collection;
 
-import com.findbydema.domain.board.controller.dto.response.BoardResponse;
 import com.findbydema.domain.board.controller.dto.response.GetBoardResponse;
 import com.findbydema.domain.board.entity.Board;
 
