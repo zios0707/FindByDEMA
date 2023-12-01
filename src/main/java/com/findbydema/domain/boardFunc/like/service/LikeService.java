@@ -26,13 +26,15 @@ public class LikeService {
         User user = userFacade.getInfo();
         Board likeBoard = boardFacade.getBoardByViewId(viewId);
 
-        if(likeBoard.getLike_users().contains(user)) {
+        if(user.getBoards().contains(likeBoard)) {
+            user.getBoards().remove(likeBoard);
             likeBoard.getLike_users().remove(user);
-            likeBoard.setLikes(likeBoard.getLikes() - 1);
+            userRepository.save(user);
             boardRepository.save(likeBoard);
         }else {
-            likeBoard.setLikes(likeBoard.getLikes() + 1);
+            user.getBoards().add(likeBoard);
             likeBoard.getLike_users().add(user);
+            userRepository.save(user);
             boardRepository.save(likeBoard);
         }
     }
