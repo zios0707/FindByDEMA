@@ -7,9 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Comment extends Board {
     @Id
-    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String writerSid;
@@ -31,23 +29,29 @@ public class Comment extends Board {
 
     private Boolean modified;
 
+    private Boolean deleted;
+
     @ManyToOne
     @JsonIgnore
-    private Board comment_board;
+    private Board commentboard;
 
-    @Builder
-    public Comment(String writerSid, String subtitle, String viewId, Date date, Board comment_board) {
+    public Comment(String writerSid, String subtitle, String viewId, Date date, Board commentboard) {
         this.writerSid = writerSid;
         this.subtitle = subtitle;
         this.viewId = viewId;
         this.date = date;
-        this.comment_board = comment_board;
+        this.commentboard = commentboard;
         modified = false;
+        deleted = false;
     }
 
     public void Modify(String subtitle) {
         this.subtitle = subtitle;
         modified = true;
+    }
+
+    public void Delete() {
+        deleted = true;
     }
 
 }

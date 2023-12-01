@@ -16,7 +16,8 @@ public class DeleteCommentService {
     public void execute(String viewId) {
         Comment comment = commentFacade.getByViewId(viewId);
         if(commentFacade.isOwn(viewId)) {
-            commentRepository.delete(comment);
+            comment.Delete();
+            commentRepository.save(comment);
         }else {
             throw NotOwnerException.EXCEPTION;
         }

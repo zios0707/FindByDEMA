@@ -21,7 +21,7 @@ public class GetListCommentService {
     private final UserFacade userFacade;
 
     public List<CommentResponse> execute(String viewId) {
-        ArrayList<Comment> comments = (ArrayList<Comment>) commentRepository.findAllByComment_boardOrderByDateAsc(boardFacade.getBoardByViewId(viewId));
+        ArrayList<Comment> comments = (ArrayList<Comment>) commentRepository.findCommentsByCommentboardOrderByDateAsc(boardFacade.getBoardByViewId(viewId));
         CommentCollection commentCollection = new CommentCollection(comments, userFacade);
         return commentCollection.toResponse();
     }

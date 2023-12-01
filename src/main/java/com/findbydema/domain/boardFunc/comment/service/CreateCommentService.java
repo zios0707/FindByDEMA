@@ -23,13 +23,13 @@ public class CreateCommentService {
     private final MakeIdHelper helper;
 
     public void execute(String viewId, CreateCommentRequest createCommentRequest) {
-        Comment comment = Comment.builder()
-                .writerSid(userFacade.getInfo().getSid())
-                .date(new Date())
-                .subtitle(createCommentRequest.getSubtitle())
-                .viewId(helper.getCommentId())
-                .comment_board(boardFacade.getBoardByViewId(viewId))
-                .build();
+        Comment comment = new Comment(
+                userFacade.getInfo().getSid(),
+                createCommentRequest.getSubtitle(),
+                helper.getCommentId(),
+                new Date(),
+                boardFacade.getBoardByViewId(viewId)
+        );
 
         commentRepository.save(comment);
     }

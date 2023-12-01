@@ -18,12 +18,6 @@ public class CommentCollection {
 
     public List<CommentResponse> toResponse() {
         return comments.stream()
-                .map((comment) -> new CommentResponse(
-                        userFacade.sidToResponse(comment.getWriterSid()),
-                        comment.getSubtitle(),
-                        comment.getViewId(),
-                        comment.getDate(),
-                        comment.getModified()
-                )).toList();
+                .map((comment) -> new CommentResponse(comment, userFacade)).toList();
     }
 }
