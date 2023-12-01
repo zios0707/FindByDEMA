@@ -24,6 +24,7 @@ public class ChatController {
     private final GetMessageListService getMessageListService;
 
     private final EnterMessageService enterMessageService;
+    private final SendMessageService sendMessageService;
 
     //Client 가 SEND 할 수 있는 경로
     //stompConfig 에서 설정한 applicationDestinationPrefixes 와 @MessageMapping 경로가 병합됨
@@ -36,13 +37,10 @@ public class ChatController {
         enterMessageService.execute(message);
     }
 
-    @MessageMapping(value = "/chat/message")
-    public void message(@PathVariable String roomId, MessageRequest message) {
-        message.setRoomId(roomId);
-        message.setWriter(userFacade.getInfo().getSid());
-        saveMessageService.execute(message);
+    @MessageMapping(value = "/chat/send")
+    public void message(MessageRequest message) {
+        sendMessageService.execute(message);
 
-        template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 
     @MessageMapping(value = "/chat/quit")
