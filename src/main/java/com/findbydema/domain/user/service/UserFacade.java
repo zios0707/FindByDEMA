@@ -17,10 +17,14 @@ public class UserFacade {
     private final UserRepository userRepository;
 
     public User getInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String email = authentication.getName();
+            return userRepository.findByEmail(email)
+                    .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        }catch (Exception e) {
+            return null;
+        }
     }
 
     public User findBySid(String SID) {

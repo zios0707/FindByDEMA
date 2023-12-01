@@ -68,7 +68,7 @@ public class JwtProvider {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
-        } catch (JwtException e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -76,7 +76,7 @@ public class JwtProvider {
     public boolean isExpired(String token) {
         try {
             return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getExpiration().before(new Date());
-        }catch (JwtException e) {
+        }catch (Exception e) {
             return true;
         }
     }
