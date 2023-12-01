@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class MessageRequest {
     private String roomId;
-    private String writer;
+    private String writerSid;
     private String content;
 }
