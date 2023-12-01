@@ -3,8 +3,9 @@ package com.findbydema.domain.livechat.controller;
 import com.findbydema.domain.livechat.controller.dto.request.MessageRequest;
 import com.findbydema.domain.livechat.entity.ChatRecord;
 import com.findbydema.domain.livechat.service.GetMessageListService;
-import com.findbydema.domain.livechat.service.SaveMessageService;
-import com.findbydema.domain.user.service.UserFacade;
+import com.findbydema.domain.livechat.service.chat.send.EnterMessageService;
+import com.findbydema.domain.livechat.service.chat.send.QuitMessageService;
+import com.findbydema.domain.livechat.service.chat.send.SendMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -25,6 +26,7 @@ public class ChatController {
 
     private final EnterMessageService enterMessageService;
     private final SendMessageService sendMessageService;
+    private final QuitMessageService quitMessageService;
 
     //Client 가 SEND 할 수 있는 경로
     //stompConfig 에서 설정한 applicationDestinationPrefixes 와 @MessageMapping 경로가 병합됨
@@ -44,13 +46,8 @@ public class ChatController {
     }
 
     @MessageMapping(value = "/chat/quit")
-    public void quit(@PathVariable String roomId, MessageRequest message) {
-        message.setRoomId(roomId);
-        message.setWriter(userFacade.getInfo().getSid());
-        message.setContent(message.getWriter() + "님이 채팅방에서 나갔습니다.");
-        saveMessageService.execute(message);
-
-        template.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
+    public void quit(MessageRequest message) {
+        quitMessageService.execute(message);
     }
 
 
