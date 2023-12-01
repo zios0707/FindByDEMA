@@ -1,31 +1,34 @@
 package com.findbydema.domain.board.controller.dto.response;
 
 import com.findbydema.domain.board.entity.Board;
+import com.findbydema.domain.user.controller.dto.response.UserResponse;
+import com.findbydema.domain.user.service.UserFacade;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Date;
 
 @Getter
-@Builder
 public class GetBoardResponse {
-    private String title;
-    private String viewId;
-    private String writerSid;
-    private Date date;
-    private Long comment;
-    private Long views;
-    private Long likes;
-    private boolean modified;
+    private final String title;
+    private final String subtitle;
+    private final String viewId;
+    private final UserResponse writer;
+    private final Date date;
+    private final Long comment;
+    private final Long views;
+    private final Long likes;
+    private final boolean modified;
 
-    public GetBoardResponse(Board board) {
+    public GetBoardResponse(Board board, UserFacade userFacade) {
         this.title = board.getTitle();
+        this.subtitle = board.getSubtitle();
         this.viewId = board.getViewId();
-        this.writerSid = board.getWriterSid();
+        this.writer = userFacade.sidToResponse(board.getWriterSid());
         this.date = board.getDate();
-        this.comment = board.getComment();
+        this.comment = (long) board.getComments().size();
         this.views = board.getViews();
-        this.likes = board.getLikes();
+        this.likes = (long) board.getLike_users().size();
         this.modified = board.getModified();
     }
 

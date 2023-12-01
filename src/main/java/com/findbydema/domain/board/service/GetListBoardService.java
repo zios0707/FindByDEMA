@@ -14,13 +14,14 @@ import java.util.List;
 public class GetListBoardService {
 
     private final BoardRepository boardRepository;
+    private final UserFacade userFacade;
 
     public List<GetBoardResponse> execute(Long offset) {
         List<Board> list = boardRepository.findAllByOrderByDateAsc();
         list = list.stream().skip(offset * 5)
                 .limit(5).toList();
 
-        BoardCollection boardCollection = new BoardCollection(list);
+        BoardCollection boardCollection = new BoardCollection(list, userFacade);
 
         return boardCollection.toResponse();
     }

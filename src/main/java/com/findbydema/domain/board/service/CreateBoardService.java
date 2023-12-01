@@ -24,7 +24,7 @@ public class CreateBoardService {
     public BoardViewIdResponse execute(CreateBoardRequest createBoardRequest) {
         Board board = Board.builder()
                 .date(new Date())
-                .path(helper.getBoardId())
+                .viewId(helper.getBoardId())
                 .title(createBoardRequest.getTitle())
                 .subtitle(createBoardRequest.getSubtitle())
                 .writerSid(userFacade.getInfo().getSid())
@@ -35,7 +35,6 @@ public class CreateBoardService {
         return BoardViewIdResponse.builder()
                 .viewId(board.getViewId())
                 .build();
-
     }
 
 }

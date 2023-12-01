@@ -3,6 +3,7 @@ package com.findbydema.domain.board.service;
 import com.findbydema.domain.board.controller.dto.response.GetBoardResponse;
 import com.findbydema.domain.board.entity.Board;
 import com.findbydema.domain.board.repository.BoardRepository;
+import com.findbydema.domain.user.service.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GetBoardService {
 
+    private final UserFacade userFacade;
     private final BoardFacade boardFacade;
     private final BoardRepository boardRepository;
 
@@ -26,7 +28,7 @@ public class GetBoardService {
         boolean youSawThisBoard = false;
         String path = board.getViewId();
 
-        if(cookieList.isEmpty()) {
+        if(cookieList == null) {
             createCookie(path, response);
         }else {
             if(!Arrays.asList(cookieList.split("-")).contains(viewId)) {
@@ -43,16 +45,7 @@ public class GetBoardService {
             boardRepository.save(board);
         }
 
-        return GetBoardResponse.builder()
-                .title(board.getTitle())
-                .writerSid(board.getWriterSid())
-                .viewId(board.getViewId())
-                .views(board.getViews())
-                .likes(board.getLikes())
-                .comment(board.getComment())
-                .date(board.getDate())
-                .modified(board.getModified())
-                .build();
+        return new GetBoardResponse(board, userFacade);
     }
 
     private void createCookie(String path, HttpServletResponse response) {
