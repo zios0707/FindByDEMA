@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/board/{viewId}")
+@RequestMapping("/api/board/view/{viewId}")
 public class CommentController {
 
     private final CreateCommentService createCommentService;
