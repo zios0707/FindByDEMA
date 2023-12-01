@@ -29,8 +29,8 @@ public class BoardController {
     }
 
     @GetMapping("/page/{offset}")
-    public List<GetBoardResponse> GetListBoard(@PathVariable Long offset) {
-        return getListBoardService.execute(offset);
+    private List<GetBoardResponse> GetListBoard(@PathVariable Long offset, @RequestBody GetListBoardRequest getListBoardRequest) {
+        return getListBoardService.execute(offset, getListBoardRequest);
     }
 
     @PatchMapping("/modify/{viewId}")

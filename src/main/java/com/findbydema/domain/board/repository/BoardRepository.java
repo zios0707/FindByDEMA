@@ -14,8 +14,6 @@ public interface BoardRepository extends JpaRepository<Board, String> {
 
     Optional<Board> findByViewId(String viewId);
 
-    List<Board> findAllByOrderByDateAsc();
-
-    List<Board> findAllByLike_users(User user);
+    List<Board> findAllByTitleContainingOrderByDateAsc(String title);
 
 }
