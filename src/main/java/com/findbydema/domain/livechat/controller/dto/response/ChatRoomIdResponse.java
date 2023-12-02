@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ChattingRoomRequest {
+public class ChatRoomIdResponse {
     private String roomId;
 }
