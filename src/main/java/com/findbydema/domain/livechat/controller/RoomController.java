@@ -23,7 +23,7 @@ public class RoomController {
         return getRoomsService.execute();
     }
 
-    @PostMapping("/post")
+    @PostMapping("/")
     public ChatRoomIdResponse createRoom(@RequestBody CreateRoomRequest createRoomRequest) {
         return createRoomService.execute(createRoomRequest);
     }

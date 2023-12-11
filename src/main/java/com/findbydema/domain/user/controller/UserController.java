@@ -27,7 +27,7 @@ public class UserController {
         return searchBySidService.execute(SID);
     }
 
-    @PatchMapping("/patch")
+    @PatchMapping("/")
     public void patch(@RequestBody PatchUserRequest patchUserRequest) {
         patchUserService.execute(patchUserRequest);
     }

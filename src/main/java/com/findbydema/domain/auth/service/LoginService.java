@@ -26,7 +26,7 @@ public class LoginService {
 
         User user = userFacade.findBySid(loginRequest.getSid());
 
-        if(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        if(passwordEncoder.matches(loginRequest.getPass(), user.getPassword())) {
             throw NotMatchPasswordException.EXCEPTION;
         }
 

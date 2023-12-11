@@ -23,7 +23,7 @@ public class BoardController {
     private final GetListBoardService getListBoardService;
     private final GetBoardService getBoardService;
 
-    @PostMapping("/post")
+    @PostMapping("/")
     private BoardViewIdResponse CreateBoard(@RequestBody CreateBoardRequest createBoardRequest) {
         return createBoardService.execute(createBoardRequest);
     }
@@ -33,17 +33,17 @@ public class BoardController {
         return getListBoardService.execute(offset, getListBoardRequest);
     }
 
-    @PatchMapping("/modify/{viewId}")
+    @PatchMapping("/{viewId}")
     private BoardViewIdResponse ModifyBoard(@PathVariable String viewId, @RequestBody ModifyBoardRequest modifyBoardRequest) {
         return modifyBoardService.execute(modifyBoardRequest, viewId);
     }
 
-    @GetMapping("/view/{viewId}")
+    @GetMapping("/{viewId}")
     private GetBoardResponse getBoard(@PathVariable String viewId, @CookieValue(name = "viewCount", required = false) String lookList, HttpServletResponse response) {
         return getBoardService.execute(viewId, response, lookList);
     }
 
-    @DeleteMapping("/delete/{viewId}")
+    @DeleteMapping("/{viewId}")
     private void DeleteBoard(@PathVariable String viewId) {
         deleteBoardService.execute(viewId);
     }

@@ -42,7 +42,7 @@ public class SignService {
 
         return loginService.login(LoginRequest.builder() // 정보가 유효하니 바로 로그인으로 진행
                 .sid(request.getSid())
-                .password(request.getPassword())
+                .pass(request.getPassword())
                 .build());
     }
 }

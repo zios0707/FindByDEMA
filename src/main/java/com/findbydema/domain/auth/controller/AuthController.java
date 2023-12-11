@@ -29,7 +29,7 @@ public class AuthController {
         return signService.sign(signRequest);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/")
     public void delete(@RequestHeader("authorization") String accessToken) {
         deleteAccountService.execute(accessToken);
     }

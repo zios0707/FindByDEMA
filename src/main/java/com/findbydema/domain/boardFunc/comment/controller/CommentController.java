@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/board/view/{viewId}")
+@RequestMapping("/api/board/{viewId}")
 public class CommentController {
 
     private final CreateCommentService createCommentService;
@@ -22,7 +22,7 @@ public class CommentController {
     private final PatchCommentService patchCommentService;
     private final DeleteCommentService deleteCommentService;
 
-    @PostMapping("/post")
+    @PostMapping("/")
     public void PostComment(@PathVariable String viewId, @RequestBody CreateCommentRequest createCommentRequest) {
         createCommentService.execute(viewId, createCommentRequest);
     }
