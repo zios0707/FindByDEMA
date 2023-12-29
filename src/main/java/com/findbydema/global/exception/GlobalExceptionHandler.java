@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     /*
      * timestamp: 에러가 발생한 시간
      * status: 에러의 Http 상태
@@ -17,8 +18,8 @@ public class GlobalExceptionHandler {
      * message: 에러에 대한 내용(설정 필요)
      * errors: BindingExecption에 의해 생긴 에러 목록(설정 필요)
      * trace: 에러 스택 트레이스(설정 필요)
-     *
      **/
+
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(CustomException e) {
         return ErrorResponse.toResponseEntity(e.getErrorCode());

@@ -35,14 +35,14 @@ public class SignService {
                 request.getNickname(),
                 request.getSid(),
                 request.getEmail(),
-                request.getPassword(),
+                request.getPass(),
                 request.getImg(),
                 new Date()
         ));
 
         return loginService.login(LoginRequest.builder() // 정보가 유효하니 바로 로그인으로 진행
                 .sid(request.getSid())
-                .pass(request.getPassword())
+                .pass(request.getPass())
                 .build());
     }
 }

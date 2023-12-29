@@ -16,5 +16,5 @@ public class SignRequest {
 
     private String sid;
 
-    private String password;
+    private String pass;
 }
